@@ -1,0 +1,72 @@
+# https://github.com/svanoort/pyresttest
+
+- config:
+    - testset: "Basic tests"
+    - timeout: 100 # Increase timeout from the default 10 seconds
+# test get method
+- test:
+    - name: "Get URL Method"
+    - url: "/prod/items"
+    - method: "GET"
+
+# test create / post method
+- test:
+    - name: "Create URL Method"
+    - url: "/prod/items"
+    - method: "POST"
+    - body: '{"linkId": 3, "URL": "www.google.com"}'
+    - headers: { "Content-Type": "application/json" }
+
+# test delete method
+- test:
+    - name: "Delete URL Method"
+    - url: "/prod/items"
+    - method: "DELETE"
+    - body: '{"linkId": 3}'
+
+# test put / update method
+- test:
+    - name: "Update URL Method"
+    - url: "/prod/items"
+    - method: "PUT"
+    - body: '{"linkId": 1, "URL": "www.youtube.com"}'
+    - headers: { "Content-Type": "application/json" }
+
+# bench mark time for get method
+- benchmark:
+    - name: "Benchmark time for Get"
+    - url: "/prod/items"
+    - warmup_runs: 2
+    - "benchmark_runs": "4"
+    - metrics:
+        - total_time: mean
+
+# bench mark time for post method
+- benchmark:
+    - name: "Benchmark time for Post"
+    - url: "/prod/items"
+    - body: '{"linkId": 3, "URL": "www.google.com"}'
+    - warmup_runs: 2
+    - "benchmark_runs": "4"
+    - metrics:
+        - total_time: mean
+
+# bench mark time for delete method
+- benchmark:
+    - name: "Benchmark time for Delete"
+    - url: "/prod/items"
+    - body: '{"linkId": 3}'
+    - warmup_runs: 2
+    - "benchmark_runs": "4"
+    - metrics:
+        - total_time: mean
+
+# bench mark time for put method
+- benchmark:
+    - name: "Benchmark time for Put"
+    - url: "/prod/items"
+    - body: '{"linkId": 1, "URL": "www.youtube.com"}'
+    - warmup_runs: 2
+    - "benchmark_runs": "4"
+    - metrics:
+        - total_time: mean
