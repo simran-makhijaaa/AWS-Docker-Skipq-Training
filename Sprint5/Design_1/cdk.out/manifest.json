@@ -1,0 +1,161 @@
+{
+  "version": "21.0.0",
+  "artifacts": {
+    "SimranDesign1Stack.assets": {
+      "type": "cdk:asset-manifest",
+      "properties": {
+        "file": "SimranDesign1Stack.assets.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+      }
+    },
+    "SimranDesign1Stack": {
+      "type": "aws:cloudformation:stack",
+      "environment": "aws://unknown-account/unknown-region",
+      "properties": {
+        "templateFile": "SimranDesign1Stack.template.json",
+        "tags": {
+          "cohort": "Sirius",
+          "name": "Simran_5_1"
+        },
+        "validateOnSynth": false,
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/7c69058bf46349b7df396d2b4eeb5e2aa631da3a6f19ddbc9504ba17dde484eb.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
+        "additionalDependencies": [
+          "SimranDesign1Stack.assets"
+        ],
+        "lookupRole": {
+          "arn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-lookup-role-${AWS::AccountId}-${AWS::Region}",
+          "requiresBootstrapStackVersion": 8,
+          "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+        }
+      },
+      "dependencies": [
+        "SimranDesign1Stack.assets"
+      ],
+      "metadata": {
+        "/SimranDesign1Stack": [
+          {
+            "type": "aws:cdk:stack-tags",
+            "data": [
+              {
+                "Key": "cohort",
+                "Value": "Sirius"
+              },
+              {
+                "Key": "name",
+                "Value": "Simran_5_1"
+              }
+            ]
+          }
+        ],
+        "/SimranDesign1Stack/lambda-role/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "lambdaroleDFE21467"
+          }
+        ],
+        "/SimranDesign1Stack/ApiLambda/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ApiLambda91D2282D"
+          }
+        ],
+        "/SimranDesign1Stack/simranApi_design_1/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "simranApidesign18531D60E"
+          }
+        ],
+        "/SimranDesign1Stack/simranApi_design_1/Deployment/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "simranApidesign1Deployment2F435C503fda98d92612e9001d32c8fcc4f3ad47"
+          }
+        ],
+        "/SimranDesign1Stack/simranApi_design_1/DeploymentStage.prod/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "simranApidesign1DeploymentStageprod5AFC24EE"
+          }
+        ],
+        "/SimranDesign1Stack/simranApi_design_1/Endpoint": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "simranApidesign1Endpoint90A9611D"
+          }
+        ],
+        "/SimranDesign1Stack/simranApi_design_1/Default/EmailResponse/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "simranApidesign1EmailResponse9D306245"
+          }
+        ],
+        "/SimranDesign1Stack/simranApi_design_1/Default/EmailResponse/PUT/ApiPermission.SimranDesign1StacksimranApidesign1FEAA8BFE.PUT..EmailResponse": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "simranApidesign1EmailResponsePUTApiPermissionSimranDesign1StacksimranApidesign1FEAA8BFEPUTEmailResponse1E30DD18"
+          }
+        ],
+        "/SimranDesign1Stack/simranApi_design_1/Default/EmailResponse/PUT/ApiPermission.Test.SimranDesign1StacksimranApidesign1FEAA8BFE.PUT..EmailResponse": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "simranApidesign1EmailResponsePUTApiPermissionTestSimranDesign1StacksimranApidesign1FEAA8BFEPUTEmailResponseCF6871CC"
+          }
+        ],
+        "/SimranDesign1Stack/simranApi_design_1/Default/EmailResponse/PUT/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "simranApidesign1EmailResponsePUT6007EE0B"
+          }
+        ],
+        "/SimranDesign1Stack/DesignEmailNotifications/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DesignEmailNotificationsE0F559CC"
+          }
+        ],
+        "/SimranDesign1Stack/DesignEmailNotifications/simran.makhija.skipq@gmail.com/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DesignEmailNotificationssimranmakhijaskipqgmailcomC15505CF"
+          }
+        ],
+        "/SimranDesign1Stack/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/SimranDesign1Stack/CDKMetadata/Condition": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadataAvailable"
+          }
+        ],
+        "/SimranDesign1Stack/BootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BootstrapVersion"
+          }
+        ],
+        "/SimranDesign1Stack/CheckBootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CheckBootstrapVersion"
+          }
+        ]
+      },
+      "displayName": "SimranDesign1Stack"
+    },
+    "Tree": {
+      "type": "cdk:tree",
+      "properties": {
+        "file": "tree.json"
+      }
+    }
+  }
+}

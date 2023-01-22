@@ -1,0 +1,239 @@
+{
+  "version": "21.0.0",
+  "artifacts": {
+    "SimranDesign2Stack.assets": {
+      "type": "cdk:asset-manifest",
+      "properties": {
+        "file": "SimranDesign2Stack.assets.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+      }
+    },
+    "SimranDesign2Stack": {
+      "type": "aws:cloudformation:stack",
+      "environment": "aws://315997497220/us-east-2",
+      "properties": {
+        "templateFile": "SimranDesign2Stack.template.json",
+        "tags": {
+          "cohort": "Sirius",
+          "name": "Simran_5_2"
+        },
+        "validateOnSynth": false,
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::315997497220:role/cdk-hnb659fds-deploy-role-315997497220-us-east-2",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::315997497220:role/cdk-hnb659fds-cfn-exec-role-315997497220-us-east-2",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-315997497220-us-east-2/16cd8071b64713433fd0d14515128c867e1103a98bb39fbdb2bc52ff9c43a139.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
+        "additionalDependencies": [
+          "SimranDesign2Stack.assets"
+        ],
+        "lookupRole": {
+          "arn": "arn:${AWS::Partition}:iam::315997497220:role/cdk-hnb659fds-lookup-role-315997497220-us-east-2",
+          "requiresBootstrapStackVersion": 8,
+          "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+        }
+      },
+      "dependencies": [
+        "SimranDesign2Stack.assets"
+      ],
+      "metadata": {
+        "/SimranDesign2Stack": [
+          {
+            "type": "aws:cdk:stack-tags",
+            "data": [
+              {
+                "Key": "cohort",
+                "Value": "Sirius"
+              },
+              {
+                "Key": "name",
+                "Value": "Simran_5_2"
+              }
+            ]
+          }
+        ],
+        "/SimranDesign2Stack/lambda-role/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "lambdaroleDFE21467"
+          }
+        ],
+        "/SimranDesign2Stack/lambda-role/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "lambdaroleDefaultPolicyB1623966"
+          }
+        ],
+        "/SimranDesign2Stack/ApiLambda/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ApiLambda91D2282D"
+          }
+        ],
+        "/SimranDesign2Stack/DesignAPITable/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DesignAPITable75F6D27C"
+          }
+        ],
+        "/SimranDesign2Stack/simranApi_design_2_1/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "simranApidesign21D93E5C29"
+          }
+        ],
+        "/SimranDesign2Stack/simranApi_design_2_1/Deployment/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "simranApidesign21Deployment3B829DD68f729e5ff61ba7b79e634bc595d9cdbe"
+          }
+        ],
+        "/SimranDesign2Stack/simranApi_design_2_1/DeploymentStage.prod/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "simranApidesign21DeploymentStageprod735C2FA3"
+          }
+        ],
+        "/SimranDesign2Stack/simranApi_design_2_1/Endpoint": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "simranApidesign21EndpointA9AB717F"
+          }
+        ],
+        "/SimranDesign2Stack/simranApi_design_2_1/Default/root/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "simranApidesign21root884F7040"
+          }
+        ],
+        "/SimranDesign2Stack/simranApi_design_2_1/Default/root/GET/ApiPermission.SimranDesign2StacksimranApidesign217445310C.GET..root": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "simranApidesign21rootGETApiPermissionSimranDesign2StacksimranApidesign217445310CGETroot6C82549F"
+          }
+        ],
+        "/SimranDesign2Stack/simranApi_design_2_1/Default/root/GET/ApiPermission.Test.SimranDesign2StacksimranApidesign217445310C.GET..root": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "simranApidesign21rootGETApiPermissionTestSimranDesign2StacksimranApidesign217445310CGETrootC594792C"
+          }
+        ],
+        "/SimranDesign2Stack/simranApi_design_2_1/Default/root/GET/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "simranApidesign21rootGETCAB34F19"
+          }
+        ],
+        "/SimranDesign2Stack/simranApi_design_2_1/Default/root/POST/ApiPermission.SimranDesign2StacksimranApidesign217445310C.POST..root": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "simranApidesign21rootPOSTApiPermissionSimranDesign2StacksimranApidesign217445310CPOSTroot6405DAE2"
+          }
+        ],
+        "/SimranDesign2Stack/simranApi_design_2_1/Default/root/POST/ApiPermission.Test.SimranDesign2StacksimranApidesign217445310C.POST..root": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "simranApidesign21rootPOSTApiPermissionTestSimranDesign2StacksimranApidesign217445310CPOSTrootB52F69E3"
+          }
+        ],
+        "/SimranDesign2Stack/simranApi_design_2_1/Default/root/POST/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "simranApidesign21rootPOSTE5EE935E"
+          }
+        ],
+        "/SimranDesign2Stack/simranApi_design_2_2/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "simranApidesign22AB2B4C26"
+          }
+        ],
+        "/SimranDesign2Stack/simranApi_design_2_2/Deployment/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "simranApidesign22Deployment19DB739F72d3a78d62d5b532858594b566471a50"
+          }
+        ],
+        "/SimranDesign2Stack/simranApi_design_2_2/DeploymentStage.prod/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "simranApidesign22DeploymentStageprodE9BD6F66"
+          }
+        ],
+        "/SimranDesign2Stack/simranApi_design_2_2/Endpoint": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "simranApidesign22Endpoint196C0FC9"
+          }
+        ],
+        "/SimranDesign2Stack/simranApi_design_2_2/Default/root/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "simranApidesign22root8219FA6B"
+          }
+        ],
+        "/SimranDesign2Stack/simranApi_design_2_2/Default/root/GET/ApiPermission.SimranDesign2StacksimranApidesign22BE4E2BB3.GET..root": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "simranApidesign22rootGETApiPermissionSimranDesign2StacksimranApidesign22BE4E2BB3GETroot77FC510D"
+          }
+        ],
+        "/SimranDesign2Stack/simranApi_design_2_2/Default/root/GET/ApiPermission.Test.SimranDesign2StacksimranApidesign22BE4E2BB3.GET..root": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "simranApidesign22rootGETApiPermissionTestSimranDesign2StacksimranApidesign22BE4E2BB3GETroot481F5280"
+          }
+        ],
+        "/SimranDesign2Stack/simranApi_design_2_2/Default/root/GET/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "simranApidesign22rootGETE46295CD"
+          }
+        ],
+        "/SimranDesign2Stack/simranApi_design_2_2/Default/root/POST/ApiPermission.SimranDesign2StacksimranApidesign22BE4E2BB3.POST..root": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "simranApidesign22rootPOSTApiPermissionSimranDesign2StacksimranApidesign22BE4E2BB3POSTrootD21B6B5A"
+          }
+        ],
+        "/SimranDesign2Stack/simranApi_design_2_2/Default/root/POST/ApiPermission.Test.SimranDesign2StacksimranApidesign22BE4E2BB3.POST..root": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "simranApidesign22rootPOSTApiPermissionTestSimranDesign2StacksimranApidesign22BE4E2BB3POSTroot37C49F70"
+          }
+        ],
+        "/SimranDesign2Stack/simranApi_design_2_2/Default/root/POST/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "simranApidesign22rootPOST4422DCD9"
+          }
+        ],
+        "/SimranDesign2Stack/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/SimranDesign2Stack/BootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BootstrapVersion"
+          }
+        ],
+        "/SimranDesign2Stack/CheckBootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CheckBootstrapVersion"
+          }
+        ]
+      },
+      "displayName": "SimranDesign2Stack"
+    },
+    "Tree": {
+      "type": "cdk:tree",
+      "properties": {
+        "file": "tree.json"
+      }
+    }
+  }
+}

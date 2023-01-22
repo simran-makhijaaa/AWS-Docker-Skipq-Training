@@ -1,0 +1,1146 @@
+{
+  "version": "tree-0.1",
+  "tree": {
+    "id": "App",
+    "path": "",
+    "children": {
+      "SimranDesign2Stack": {
+        "id": "SimranDesign2Stack",
+        "path": "SimranDesign2Stack",
+        "children": {
+          "lambda-role": {
+            "id": "lambda-role",
+            "path": "SimranDesign2Stack/lambda-role",
+            "children": {
+              "Importlambda-role": {
+                "id": "Importlambda-role",
+                "path": "SimranDesign2Stack/lambda-role/Importlambda-role",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.Resource",
+                  "version": "2.51.1"
+                }
+              },
+              "Resource": {
+                "id": "Resource",
+                "path": "SimranDesign2Stack/lambda-role/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                  "aws:cdk:cloudformation:props": {
+                    "assumeRolePolicyDocument": {
+                      "Statement": [
+                        {
+                          "Action": "sts:AssumeRole",
+                          "Effect": "Allow",
+                          "Principal": {
+                            "Service": "lambda.amazonaws.com"
+                          }
+                        }
+                      ],
+                      "Version": "2012-10-17"
+                    },
+                    "managedPolicyArns": [
+                      {
+                        "Fn::Join": [
+                          "",
+                          [
+                            "arn:",
+                            {
+                              "Ref": "AWS::Partition"
+                            },
+                            ":iam::aws:policy/CloudWatchFullAccess"
+                          ]
+                        ]
+                      },
+                      {
+                        "Fn::Join": [
+                          "",
+                          [
+                            "arn:",
+                            {
+                              "Ref": "AWS::Partition"
+                            },
+                            ":iam::aws:policy/AmazonAPIGatewayInvokeFullAccess"
+                          ]
+                        ]
+                      },
+                      {
+                        "Fn::Join": [
+                          "",
+                          [
+                            "arn:",
+                            {
+                              "Ref": "AWS::Partition"
+                            },
+                            ":iam::aws:policy/AmazonDynamoDBFullAccess"
+                          ]
+                        ]
+                      }
+                    ],
+                    "tags": [
+                      {
+                        "key": "cohort",
+                        "value": "Sirius"
+                      },
+                      {
+                        "key": "name",
+                        "value": "Simran_5_2"
+                      }
+                    ]
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_iam.CfnRole",
+                  "version": "2.51.1"
+                }
+              },
+              "DefaultPolicy": {
+                "id": "DefaultPolicy",
+                "path": "SimranDesign2Stack/lambda-role/DefaultPolicy",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "SimranDesign2Stack/lambda-role/DefaultPolicy/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
+                      "aws:cdk:cloudformation:props": {
+                        "policyDocument": {
+                          "Statement": [
+                            {
+                              "Action": [
+                                "dynamodb:BatchGetItem",
+                                "dynamodb:BatchWriteItem",
+                                "dynamodb:ConditionCheckItem",
+                                "dynamodb:DeleteItem",
+                                "dynamodb:DescribeTable",
+                                "dynamodb:GetItem",
+                                "dynamodb:GetRecords",
+                                "dynamodb:GetShardIterator",
+                                "dynamodb:PutItem",
+                                "dynamodb:Query",
+                                "dynamodb:Scan",
+                                "dynamodb:UpdateItem"
+                              ],
+                              "Effect": "Allow",
+                              "Resource": [
+                                {
+                                  "Fn::GetAtt": [
+                                    "DesignAPITable75F6D27C",
+                                    "Arn"
+                                  ]
+                                },
+                                {
+                                  "Ref": "AWS::NoValue"
+                                }
+                              ]
+                            }
+                          ],
+                          "Version": "2012-10-17"
+                        },
+                        "policyName": "lambdaroleDefaultPolicyB1623966",
+                        "roles": [
+                          {
+                            "Ref": "lambdaroleDFE21467"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_iam.CfnPolicy",
+                      "version": "2.51.1"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_iam.Policy",
+                  "version": "2.51.1"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_iam.Role",
+              "version": "2.51.1"
+            }
+          },
+          "ApiLambda": {
+            "id": "ApiLambda",
+            "path": "SimranDesign2Stack/ApiLambda",
+            "children": {
+              "Code": {
+                "id": "Code",
+                "path": "SimranDesign2Stack/ApiLambda/Code",
+                "children": {
+                  "Stage": {
+                    "id": "Stage",
+                    "path": "SimranDesign2Stack/ApiLambda/Code/Stage",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.AssetStaging",
+                      "version": "2.51.1"
+                    }
+                  },
+                  "AssetBucket": {
+                    "id": "AssetBucket",
+                    "path": "SimranDesign2Stack/ApiLambda/Code/AssetBucket",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_s3.BucketBase",
+                      "version": "2.51.1"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_s3_assets.Asset",
+                  "version": "2.51.1"
+                }
+              },
+              "Resource": {
+                "id": "Resource",
+                "path": "SimranDesign2Stack/ApiLambda/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::Lambda::Function",
+                  "aws:cdk:cloudformation:props": {
+                    "code": {
+                      "s3Bucket": "cdk-hnb659fds-assets-315997497220-us-east-2",
+                      "s3Key": "9d52271e1c37b870b2793454d5d9e32c445db7af636d1db3149f931b27601307.zip"
+                    },
+                    "role": {
+                      "Fn::GetAtt": [
+                        "lambdaroleDFE21467",
+                        "Arn"
+                      ]
+                    },
+                    "environment": {
+                      "variables": {
+                        "APIDesignTable": {
+                          "Ref": "DesignAPITable75F6D27C"
+                        }
+                      }
+                    },
+                    "handler": "api.lambda_handler",
+                    "runtime": "python3.9",
+                    "tags": [
+                      {
+                        "key": "cohort",
+                        "value": "Sirius"
+                      },
+                      {
+                        "key": "name",
+                        "value": "Simran_5_2"
+                      }
+                    ],
+                    "timeout": 300
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_lambda.CfnFunction",
+                  "version": "2.51.1"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_lambda.Function",
+              "version": "2.51.1"
+            }
+          },
+          "DesignAPITable": {
+            "id": "DesignAPITable",
+            "path": "SimranDesign2Stack/DesignAPITable",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "SimranDesign2Stack/DesignAPITable/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::DynamoDB::Table",
+                  "aws:cdk:cloudformation:props": {
+                    "keySchema": [
+                      {
+                        "attributeName": "attr1",
+                        "keyType": "HASH"
+                      },
+                      {
+                        "attributeName": "requestTime",
+                        "keyType": "RANGE"
+                      }
+                    ],
+                    "attributeDefinitions": [
+                      {
+                        "attributeName": "attr1",
+                        "attributeType": "S"
+                      },
+                      {
+                        "attributeName": "requestTime",
+                        "attributeType": "S"
+                      }
+                    ],
+                    "provisionedThroughput": {
+                      "readCapacityUnits": 5,
+                      "writeCapacityUnits": 5
+                    },
+                    "tags": [
+                      {
+                        "key": "cohort",
+                        "value": "Sirius"
+                      },
+                      {
+                        "key": "name",
+                        "value": "Simran_5_2"
+                      }
+                    ]
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_dynamodb.CfnTable",
+                  "version": "2.51.1"
+                }
+              },
+              "ScalingRole": {
+                "id": "ScalingRole",
+                "path": "SimranDesign2Stack/DesignAPITable/ScalingRole",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.Resource",
+                  "version": "2.51.1"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_dynamodb.Table",
+              "version": "2.51.1"
+            }
+          },
+          "simranApi_design_2_1": {
+            "id": "simranApi_design_2_1",
+            "path": "SimranDesign2Stack/simranApi_design_2_1",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "SimranDesign2Stack/simranApi_design_2_1/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::ApiGateway::RestApi",
+                  "aws:cdk:cloudformation:props": {
+                    "name": "simranApi_design_2_1",
+                    "tags": [
+                      {
+                        "key": "cohort",
+                        "value": "Sirius"
+                      },
+                      {
+                        "key": "name",
+                        "value": "Simran_5_2"
+                      }
+                    ]
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_apigateway.CfnRestApi",
+                  "version": "2.51.1"
+                }
+              },
+              "Deployment": {
+                "id": "Deployment",
+                "path": "SimranDesign2Stack/simranApi_design_2_1/Deployment",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "SimranDesign2Stack/simranApi_design_2_1/Deployment/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::ApiGateway::Deployment",
+                      "aws:cdk:cloudformation:props": {
+                        "restApiId": {
+                          "Ref": "simranApidesign21D93E5C29"
+                        },
+                        "description": "Automatically created by the RestApi construct"
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_apigateway.CfnDeployment",
+                      "version": "2.51.1"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_apigateway.Deployment",
+                  "version": "2.51.1"
+                }
+              },
+              "DeploymentStage.prod": {
+                "id": "DeploymentStage.prod",
+                "path": "SimranDesign2Stack/simranApi_design_2_1/DeploymentStage.prod",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "SimranDesign2Stack/simranApi_design_2_1/DeploymentStage.prod/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::ApiGateway::Stage",
+                      "aws:cdk:cloudformation:props": {
+                        "restApiId": {
+                          "Ref": "simranApidesign21D93E5C29"
+                        },
+                        "deploymentId": {
+                          "Ref": "simranApidesign21Deployment3B829DD68f729e5ff61ba7b79e634bc595d9cdbe"
+                        },
+                        "stageName": "prod",
+                        "tags": [
+                          {
+                            "key": "cohort",
+                            "value": "Sirius"
+                          },
+                          {
+                            "key": "name",
+                            "value": "Simran_5_2"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_apigateway.CfnStage",
+                      "version": "2.51.1"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_apigateway.Stage",
+                  "version": "2.51.1"
+                }
+              },
+              "Endpoint": {
+                "id": "Endpoint",
+                "path": "SimranDesign2Stack/simranApi_design_2_1/Endpoint",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnOutput",
+                  "version": "2.51.1"
+                }
+              },
+              "Default": {
+                "id": "Default",
+                "path": "SimranDesign2Stack/simranApi_design_2_1/Default",
+                "children": {
+                  "root": {
+                    "id": "root",
+                    "path": "SimranDesign2Stack/simranApi_design_2_1/Default/root",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "SimranDesign2Stack/simranApi_design_2_1/Default/root/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::ApiGateway::Resource",
+                          "aws:cdk:cloudformation:props": {
+                            "parentId": {
+                              "Fn::GetAtt": [
+                                "simranApidesign21D93E5C29",
+                                "RootResourceId"
+                              ]
+                            },
+                            "pathPart": "root",
+                            "restApiId": {
+                              "Ref": "simranApidesign21D93E5C29"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_apigateway.CfnResource",
+                          "version": "2.51.1"
+                        }
+                      },
+                      "GET": {
+                        "id": "GET",
+                        "path": "SimranDesign2Stack/simranApi_design_2_1/Default/root/GET",
+                        "children": {
+                          "ApiPermission.SimranDesign2StacksimranApidesign217445310C.GET..root": {
+                            "id": "ApiPermission.SimranDesign2StacksimranApidesign217445310C.GET..root",
+                            "path": "SimranDesign2Stack/simranApi_design_2_1/Default/root/GET/ApiPermission.SimranDesign2StacksimranApidesign217445310C.GET..root",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::Lambda::Permission",
+                              "aws:cdk:cloudformation:props": {
+                                "action": "lambda:InvokeFunction",
+                                "functionName": {
+                                  "Fn::GetAtt": [
+                                    "ApiLambda91D2282D",
+                                    "Arn"
+                                  ]
+                                },
+                                "principal": "apigateway.amazonaws.com",
+                                "sourceArn": {
+                                  "Fn::Join": [
+                                    "",
+                                    [
+                                      "arn:aws:execute-api:us-east-2:315997497220:",
+                                      {
+                                        "Ref": "simranApidesign21D93E5C29"
+                                      },
+                                      "/",
+                                      {
+                                        "Ref": "simranApidesign21DeploymentStageprod735C2FA3"
+                                      },
+                                      "/GET/root"
+                                    ]
+                                  ]
+                                }
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_lambda.CfnPermission",
+                              "version": "2.51.1"
+                            }
+                          },
+                          "ApiPermission.Test.SimranDesign2StacksimranApidesign217445310C.GET..root": {
+                            "id": "ApiPermission.Test.SimranDesign2StacksimranApidesign217445310C.GET..root",
+                            "path": "SimranDesign2Stack/simranApi_design_2_1/Default/root/GET/ApiPermission.Test.SimranDesign2StacksimranApidesign217445310C.GET..root",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::Lambda::Permission",
+                              "aws:cdk:cloudformation:props": {
+                                "action": "lambda:InvokeFunction",
+                                "functionName": {
+                                  "Fn::GetAtt": [
+                                    "ApiLambda91D2282D",
+                                    "Arn"
+                                  ]
+                                },
+                                "principal": "apigateway.amazonaws.com",
+                                "sourceArn": {
+                                  "Fn::Join": [
+                                    "",
+                                    [
+                                      "arn:aws:execute-api:us-east-2:315997497220:",
+                                      {
+                                        "Ref": "simranApidesign21D93E5C29"
+                                      },
+                                      "/test-invoke-stage/GET/root"
+                                    ]
+                                  ]
+                                }
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_lambda.CfnPermission",
+                              "version": "2.51.1"
+                            }
+                          },
+                          "Resource": {
+                            "id": "Resource",
+                            "path": "SimranDesign2Stack/simranApi_design_2_1/Default/root/GET/Resource",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::ApiGateway::Method",
+                              "aws:cdk:cloudformation:props": {
+                                "httpMethod": "GET",
+                                "resourceId": {
+                                  "Ref": "simranApidesign21root884F7040"
+                                },
+                                "restApiId": {
+                                  "Ref": "simranApidesign21D93E5C29"
+                                },
+                                "authorizationType": "NONE",
+                                "integration": {
+                                  "type": "AWS_PROXY",
+                                  "uri": {
+                                    "Fn::Join": [
+                                      "",
+                                      [
+                                        "arn:aws:apigateway:us-east-2:lambda:path/2015-03-31/functions/",
+                                        {
+                                          "Fn::GetAtt": [
+                                            "ApiLambda91D2282D",
+                                            "Arn"
+                                          ]
+                                        },
+                                        "/invocations"
+                                      ]
+                                    ]
+                                  },
+                                  "integrationHttpMethod": "POST"
+                                }
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_apigateway.CfnMethod",
+                              "version": "2.51.1"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_apigateway.Method",
+                          "version": "2.51.1"
+                        }
+                      },
+                      "POST": {
+                        "id": "POST",
+                        "path": "SimranDesign2Stack/simranApi_design_2_1/Default/root/POST",
+                        "children": {
+                          "ApiPermission.SimranDesign2StacksimranApidesign217445310C.POST..root": {
+                            "id": "ApiPermission.SimranDesign2StacksimranApidesign217445310C.POST..root",
+                            "path": "SimranDesign2Stack/simranApi_design_2_1/Default/root/POST/ApiPermission.SimranDesign2StacksimranApidesign217445310C.POST..root",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::Lambda::Permission",
+                              "aws:cdk:cloudformation:props": {
+                                "action": "lambda:InvokeFunction",
+                                "functionName": {
+                                  "Fn::GetAtt": [
+                                    "ApiLambda91D2282D",
+                                    "Arn"
+                                  ]
+                                },
+                                "principal": "apigateway.amazonaws.com",
+                                "sourceArn": {
+                                  "Fn::Join": [
+                                    "",
+                                    [
+                                      "arn:aws:execute-api:us-east-2:315997497220:",
+                                      {
+                                        "Ref": "simranApidesign21D93E5C29"
+                                      },
+                                      "/",
+                                      {
+                                        "Ref": "simranApidesign21DeploymentStageprod735C2FA3"
+                                      },
+                                      "/POST/root"
+                                    ]
+                                  ]
+                                }
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_lambda.CfnPermission",
+                              "version": "2.51.1"
+                            }
+                          },
+                          "ApiPermission.Test.SimranDesign2StacksimranApidesign217445310C.POST..root": {
+                            "id": "ApiPermission.Test.SimranDesign2StacksimranApidesign217445310C.POST..root",
+                            "path": "SimranDesign2Stack/simranApi_design_2_1/Default/root/POST/ApiPermission.Test.SimranDesign2StacksimranApidesign217445310C.POST..root",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::Lambda::Permission",
+                              "aws:cdk:cloudformation:props": {
+                                "action": "lambda:InvokeFunction",
+                                "functionName": {
+                                  "Fn::GetAtt": [
+                                    "ApiLambda91D2282D",
+                                    "Arn"
+                                  ]
+                                },
+                                "principal": "apigateway.amazonaws.com",
+                                "sourceArn": {
+                                  "Fn::Join": [
+                                    "",
+                                    [
+                                      "arn:aws:execute-api:us-east-2:315997497220:",
+                                      {
+                                        "Ref": "simranApidesign21D93E5C29"
+                                      },
+                                      "/test-invoke-stage/POST/root"
+                                    ]
+                                  ]
+                                }
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_lambda.CfnPermission",
+                              "version": "2.51.1"
+                            }
+                          },
+                          "Resource": {
+                            "id": "Resource",
+                            "path": "SimranDesign2Stack/simranApi_design_2_1/Default/root/POST/Resource",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::ApiGateway::Method",
+                              "aws:cdk:cloudformation:props": {
+                                "httpMethod": "POST",
+                                "resourceId": {
+                                  "Ref": "simranApidesign21root884F7040"
+                                },
+                                "restApiId": {
+                                  "Ref": "simranApidesign21D93E5C29"
+                                },
+                                "authorizationType": "NONE",
+                                "integration": {
+                                  "type": "AWS_PROXY",
+                                  "uri": {
+                                    "Fn::Join": [
+                                      "",
+                                      [
+                                        "arn:aws:apigateway:us-east-2:lambda:path/2015-03-31/functions/",
+                                        {
+                                          "Fn::GetAtt": [
+                                            "ApiLambda91D2282D",
+                                            "Arn"
+                                          ]
+                                        },
+                                        "/invocations"
+                                      ]
+                                    ]
+                                  },
+                                  "integrationHttpMethod": "POST"
+                                }
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_apigateway.CfnMethod",
+                              "version": "2.51.1"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_apigateway.Method",
+                          "version": "2.51.1"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_apigateway.Resource",
+                      "version": "2.51.1"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_apigateway.ResourceBase",
+                  "version": "2.51.1"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_apigateway.LambdaRestApi",
+              "version": "2.51.1"
+            }
+          },
+          "simranApi_design_2_2": {
+            "id": "simranApi_design_2_2",
+            "path": "SimranDesign2Stack/simranApi_design_2_2",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "SimranDesign2Stack/simranApi_design_2_2/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::ApiGateway::RestApi",
+                  "aws:cdk:cloudformation:props": {
+                    "name": "simranApi_design_2_2",
+                    "tags": [
+                      {
+                        "key": "cohort",
+                        "value": "Sirius"
+                      },
+                      {
+                        "key": "name",
+                        "value": "Simran_5_2"
+                      }
+                    ]
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_apigateway.CfnRestApi",
+                  "version": "2.51.1"
+                }
+              },
+              "Deployment": {
+                "id": "Deployment",
+                "path": "SimranDesign2Stack/simranApi_design_2_2/Deployment",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "SimranDesign2Stack/simranApi_design_2_2/Deployment/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::ApiGateway::Deployment",
+                      "aws:cdk:cloudformation:props": {
+                        "restApiId": {
+                          "Ref": "simranApidesign22AB2B4C26"
+                        },
+                        "description": "Automatically created by the RestApi construct"
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_apigateway.CfnDeployment",
+                      "version": "2.51.1"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_apigateway.Deployment",
+                  "version": "2.51.1"
+                }
+              },
+              "DeploymentStage.prod": {
+                "id": "DeploymentStage.prod",
+                "path": "SimranDesign2Stack/simranApi_design_2_2/DeploymentStage.prod",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "SimranDesign2Stack/simranApi_design_2_2/DeploymentStage.prod/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::ApiGateway::Stage",
+                      "aws:cdk:cloudformation:props": {
+                        "restApiId": {
+                          "Ref": "simranApidesign22AB2B4C26"
+                        },
+                        "deploymentId": {
+                          "Ref": "simranApidesign22Deployment19DB739F72d3a78d62d5b532858594b566471a50"
+                        },
+                        "stageName": "prod",
+                        "tags": [
+                          {
+                            "key": "cohort",
+                            "value": "Sirius"
+                          },
+                          {
+                            "key": "name",
+                            "value": "Simran_5_2"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_apigateway.CfnStage",
+                      "version": "2.51.1"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_apigateway.Stage",
+                  "version": "2.51.1"
+                }
+              },
+              "Endpoint": {
+                "id": "Endpoint",
+                "path": "SimranDesign2Stack/simranApi_design_2_2/Endpoint",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnOutput",
+                  "version": "2.51.1"
+                }
+              },
+              "Default": {
+                "id": "Default",
+                "path": "SimranDesign2Stack/simranApi_design_2_2/Default",
+                "children": {
+                  "root": {
+                    "id": "root",
+                    "path": "SimranDesign2Stack/simranApi_design_2_2/Default/root",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "SimranDesign2Stack/simranApi_design_2_2/Default/root/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::ApiGateway::Resource",
+                          "aws:cdk:cloudformation:props": {
+                            "parentId": {
+                              "Fn::GetAtt": [
+                                "simranApidesign22AB2B4C26",
+                                "RootResourceId"
+                              ]
+                            },
+                            "pathPart": "root",
+                            "restApiId": {
+                              "Ref": "simranApidesign22AB2B4C26"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_apigateway.CfnResource",
+                          "version": "2.51.1"
+                        }
+                      },
+                      "GET": {
+                        "id": "GET",
+                        "path": "SimranDesign2Stack/simranApi_design_2_2/Default/root/GET",
+                        "children": {
+                          "ApiPermission.SimranDesign2StacksimranApidesign22BE4E2BB3.GET..root": {
+                            "id": "ApiPermission.SimranDesign2StacksimranApidesign22BE4E2BB3.GET..root",
+                            "path": "SimranDesign2Stack/simranApi_design_2_2/Default/root/GET/ApiPermission.SimranDesign2StacksimranApidesign22BE4E2BB3.GET..root",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::Lambda::Permission",
+                              "aws:cdk:cloudformation:props": {
+                                "action": "lambda:InvokeFunction",
+                                "functionName": {
+                                  "Fn::GetAtt": [
+                                    "ApiLambda91D2282D",
+                                    "Arn"
+                                  ]
+                                },
+                                "principal": "apigateway.amazonaws.com",
+                                "sourceArn": {
+                                  "Fn::Join": [
+                                    "",
+                                    [
+                                      "arn:aws:execute-api:us-east-2:315997497220:",
+                                      {
+                                        "Ref": "simranApidesign22AB2B4C26"
+                                      },
+                                      "/",
+                                      {
+                                        "Ref": "simranApidesign22DeploymentStageprodE9BD6F66"
+                                      },
+                                      "/GET/root"
+                                    ]
+                                  ]
+                                }
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_lambda.CfnPermission",
+                              "version": "2.51.1"
+                            }
+                          },
+                          "ApiPermission.Test.SimranDesign2StacksimranApidesign22BE4E2BB3.GET..root": {
+                            "id": "ApiPermission.Test.SimranDesign2StacksimranApidesign22BE4E2BB3.GET..root",
+                            "path": "SimranDesign2Stack/simranApi_design_2_2/Default/root/GET/ApiPermission.Test.SimranDesign2StacksimranApidesign22BE4E2BB3.GET..root",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::Lambda::Permission",
+                              "aws:cdk:cloudformation:props": {
+                                "action": "lambda:InvokeFunction",
+                                "functionName": {
+                                  "Fn::GetAtt": [
+                                    "ApiLambda91D2282D",
+                                    "Arn"
+                                  ]
+                                },
+                                "principal": "apigateway.amazonaws.com",
+                                "sourceArn": {
+                                  "Fn::Join": [
+                                    "",
+                                    [
+                                      "arn:aws:execute-api:us-east-2:315997497220:",
+                                      {
+                                        "Ref": "simranApidesign22AB2B4C26"
+                                      },
+                                      "/test-invoke-stage/GET/root"
+                                    ]
+                                  ]
+                                }
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_lambda.CfnPermission",
+                              "version": "2.51.1"
+                            }
+                          },
+                          "Resource": {
+                            "id": "Resource",
+                            "path": "SimranDesign2Stack/simranApi_design_2_2/Default/root/GET/Resource",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::ApiGateway::Method",
+                              "aws:cdk:cloudformation:props": {
+                                "httpMethod": "GET",
+                                "resourceId": {
+                                  "Ref": "simranApidesign22root8219FA6B"
+                                },
+                                "restApiId": {
+                                  "Ref": "simranApidesign22AB2B4C26"
+                                },
+                                "authorizationType": "NONE",
+                                "integration": {
+                                  "type": "AWS_PROXY",
+                                  "uri": {
+                                    "Fn::Join": [
+                                      "",
+                                      [
+                                        "arn:aws:apigateway:us-east-2:lambda:path/2015-03-31/functions/",
+                                        {
+                                          "Fn::GetAtt": [
+                                            "ApiLambda91D2282D",
+                                            "Arn"
+                                          ]
+                                        },
+                                        "/invocations"
+                                      ]
+                                    ]
+                                  },
+                                  "integrationHttpMethod": "POST"
+                                }
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_apigateway.CfnMethod",
+                              "version": "2.51.1"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_apigateway.Method",
+                          "version": "2.51.1"
+                        }
+                      },
+                      "POST": {
+                        "id": "POST",
+                        "path": "SimranDesign2Stack/simranApi_design_2_2/Default/root/POST",
+                        "children": {
+                          "ApiPermission.SimranDesign2StacksimranApidesign22BE4E2BB3.POST..root": {
+                            "id": "ApiPermission.SimranDesign2StacksimranApidesign22BE4E2BB3.POST..root",
+                            "path": "SimranDesign2Stack/simranApi_design_2_2/Default/root/POST/ApiPermission.SimranDesign2StacksimranApidesign22BE4E2BB3.POST..root",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::Lambda::Permission",
+                              "aws:cdk:cloudformation:props": {
+                                "action": "lambda:InvokeFunction",
+                                "functionName": {
+                                  "Fn::GetAtt": [
+                                    "ApiLambda91D2282D",
+                                    "Arn"
+                                  ]
+                                },
+                                "principal": "apigateway.amazonaws.com",
+                                "sourceArn": {
+                                  "Fn::Join": [
+                                    "",
+                                    [
+                                      "arn:aws:execute-api:us-east-2:315997497220:",
+                                      {
+                                        "Ref": "simranApidesign22AB2B4C26"
+                                      },
+                                      "/",
+                                      {
+                                        "Ref": "simranApidesign22DeploymentStageprodE9BD6F66"
+                                      },
+                                      "/POST/root"
+                                    ]
+                                  ]
+                                }
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_lambda.CfnPermission",
+                              "version": "2.51.1"
+                            }
+                          },
+                          "ApiPermission.Test.SimranDesign2StacksimranApidesign22BE4E2BB3.POST..root": {
+                            "id": "ApiPermission.Test.SimranDesign2StacksimranApidesign22BE4E2BB3.POST..root",
+                            "path": "SimranDesign2Stack/simranApi_design_2_2/Default/root/POST/ApiPermission.Test.SimranDesign2StacksimranApidesign22BE4E2BB3.POST..root",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::Lambda::Permission",
+                              "aws:cdk:cloudformation:props": {
+                                "action": "lambda:InvokeFunction",
+                                "functionName": {
+                                  "Fn::GetAtt": [
+                                    "ApiLambda91D2282D",
+                                    "Arn"
+                                  ]
+                                },
+                                "principal": "apigateway.amazonaws.com",
+                                "sourceArn": {
+                                  "Fn::Join": [
+                                    "",
+                                    [
+                                      "arn:aws:execute-api:us-east-2:315997497220:",
+                                      {
+                                        "Ref": "simranApidesign22AB2B4C26"
+                                      },
+                                      "/test-invoke-stage/POST/root"
+                                    ]
+                                  ]
+                                }
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_lambda.CfnPermission",
+                              "version": "2.51.1"
+                            }
+                          },
+                          "Resource": {
+                            "id": "Resource",
+                            "path": "SimranDesign2Stack/simranApi_design_2_2/Default/root/POST/Resource",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::ApiGateway::Method",
+                              "aws:cdk:cloudformation:props": {
+                                "httpMethod": "POST",
+                                "resourceId": {
+                                  "Ref": "simranApidesign22root8219FA6B"
+                                },
+                                "restApiId": {
+                                  "Ref": "simranApidesign22AB2B4C26"
+                                },
+                                "authorizationType": "NONE",
+                                "integration": {
+                                  "type": "AWS_PROXY",
+                                  "uri": {
+                                    "Fn::Join": [
+                                      "",
+                                      [
+                                        "arn:aws:apigateway:us-east-2:lambda:path/2015-03-31/functions/",
+                                        {
+                                          "Fn::GetAtt": [
+                                            "ApiLambda91D2282D",
+                                            "Arn"
+                                          ]
+                                        },
+                                        "/invocations"
+                                      ]
+                                    ]
+                                  },
+                                  "integrationHttpMethod": "POST"
+                                }
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_apigateway.CfnMethod",
+                              "version": "2.51.1"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_apigateway.Method",
+                          "version": "2.51.1"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_apigateway.Resource",
+                      "version": "2.51.1"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_apigateway.ResourceBase",
+                  "version": "2.51.1"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_apigateway.LambdaRestApi",
+              "version": "2.51.1"
+            }
+          },
+          "CDKMetadata": {
+            "id": "CDKMetadata",
+            "path": "SimranDesign2Stack/CDKMetadata",
+            "children": {
+              "Default": {
+                "id": "Default",
+                "path": "SimranDesign2Stack/CDKMetadata/Default",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnResource",
+                  "version": "2.51.1"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "constructs.Construct",
+              "version": "10.1.170"
+            }
+          },
+          "BootstrapVersion": {
+            "id": "BootstrapVersion",
+            "path": "SimranDesign2Stack/BootstrapVersion",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnParameter",
+              "version": "2.51.1"
+            }
+          },
+          "CheckBootstrapVersion": {
+            "id": "CheckBootstrapVersion",
+            "path": "SimranDesign2Stack/CheckBootstrapVersion",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnRule",
+              "version": "2.51.1"
+            }
+          }
+        },
+        "constructInfo": {
+          "fqn": "aws-cdk-lib.Stack",
+          "version": "2.51.1"
+        }
+      },
+      "Tree": {
+        "id": "Tree",
+        "path": "Tree",
+        "constructInfo": {
+          "fqn": "constructs.Construct",
+          "version": "10.1.170"
+        }
+      }
+    },
+    "constructInfo": {
+      "fqn": "aws-cdk-lib.App",
+      "version": "2.51.1"
+    }
+  }
+}

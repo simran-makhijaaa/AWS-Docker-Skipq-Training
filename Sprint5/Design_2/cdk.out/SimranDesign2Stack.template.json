@@ -1,0 +1,835 @@
+{
+ "Resources": {
+  "lambdaroleDFE21467": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/CloudWatchFullAccess"
+       ]
+      ]
+     },
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/AmazonAPIGatewayInvokeFullAccess"
+       ]
+      ]
+     },
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/AmazonDynamoDBFullAccess"
+       ]
+      ]
+     }
+    ],
+    "Tags": [
+     {
+      "Key": "cohort",
+      "Value": "Sirius"
+     },
+     {
+      "Key": "name",
+      "Value": "Simran_5_2"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "SimranDesign2Stack/lambda-role/Resource"
+   }
+  },
+  "lambdaroleDefaultPolicyB1623966": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "dynamodb:BatchGetItem",
+        "dynamodb:BatchWriteItem",
+        "dynamodb:ConditionCheckItem",
+        "dynamodb:DeleteItem",
+        "dynamodb:DescribeTable",
+        "dynamodb:GetItem",
+        "dynamodb:GetRecords",
+        "dynamodb:GetShardIterator",
+        "dynamodb:PutItem",
+        "dynamodb:Query",
+        "dynamodb:Scan",
+        "dynamodb:UpdateItem"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::GetAtt": [
+          "DesignAPITable75F6D27C",
+          "Arn"
+         ]
+        },
+        {
+         "Ref": "AWS::NoValue"
+        }
+       ]
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "lambdaroleDefaultPolicyB1623966",
+    "Roles": [
+     {
+      "Ref": "lambdaroleDFE21467"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "SimranDesign2Stack/lambda-role/DefaultPolicy/Resource"
+   }
+  },
+  "ApiLambda91D2282D": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "S3Bucket": "cdk-hnb659fds-assets-315997497220-us-east-2",
+     "S3Key": "9d52271e1c37b870b2793454d5d9e32c445db7af636d1db3149f931b27601307.zip"
+    },
+    "Role": {
+     "Fn::GetAtt": [
+      "lambdaroleDFE21467",
+      "Arn"
+     ]
+    },
+    "Environment": {
+     "Variables": {
+      "APIDesignTable": {
+       "Ref": "DesignAPITable75F6D27C"
+      }
+     }
+    },
+    "Handler": "api.lambda_handler",
+    "Runtime": "python3.9",
+    "Tags": [
+     {
+      "Key": "cohort",
+      "Value": "Sirius"
+     },
+     {
+      "Key": "name",
+      "Value": "Simran_5_2"
+     }
+    ],
+    "Timeout": 300
+   },
+   "DependsOn": [
+    "lambdaroleDefaultPolicyB1623966",
+    "lambdaroleDFE21467"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "SimranDesign2Stack/ApiLambda/Resource",
+    "aws:asset:path": "asset.9d52271e1c37b870b2793454d5d9e32c445db7af636d1db3149f931b27601307",
+    "aws:asset:is-bundled": false,
+    "aws:asset:property": "Code"
+   }
+  },
+  "DesignAPITable75F6D27C": {
+   "Type": "AWS::DynamoDB::Table",
+   "Properties": {
+    "KeySchema": [
+     {
+      "AttributeName": "attr1",
+      "KeyType": "HASH"
+     },
+     {
+      "AttributeName": "requestTime",
+      "KeyType": "RANGE"
+     }
+    ],
+    "AttributeDefinitions": [
+     {
+      "AttributeName": "attr1",
+      "AttributeType": "S"
+     },
+     {
+      "AttributeName": "requestTime",
+      "AttributeType": "S"
+     }
+    ],
+    "ProvisionedThroughput": {
+     "ReadCapacityUnits": 5,
+     "WriteCapacityUnits": 5
+    },
+    "Tags": [
+     {
+      "Key": "cohort",
+      "Value": "Sirius"
+     },
+     {
+      "Key": "name",
+      "Value": "Simran_5_2"
+     }
+    ]
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "SimranDesign2Stack/DesignAPITable/Resource"
+   }
+  },
+  "simranApidesign21D93E5C29": {
+   "Type": "AWS::ApiGateway::RestApi",
+   "Properties": {
+    "Name": "simranApi_design_2_1",
+    "Tags": [
+     {
+      "Key": "cohort",
+      "Value": "Sirius"
+     },
+     {
+      "Key": "name",
+      "Value": "Simran_5_2"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "SimranDesign2Stack/simranApi_design_2_1/Resource"
+   }
+  },
+  "simranApidesign21Deployment3B829DD68f729e5ff61ba7b79e634bc595d9cdbe": {
+   "Type": "AWS::ApiGateway::Deployment",
+   "Properties": {
+    "RestApiId": {
+     "Ref": "simranApidesign21D93E5C29"
+    },
+    "Description": "Automatically created by the RestApi construct"
+   },
+   "DependsOn": [
+    "simranApidesign21rootGETCAB34F19",
+    "simranApidesign21rootPOSTE5EE935E",
+    "simranApidesign21root884F7040"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "SimranDesign2Stack/simranApi_design_2_1/Deployment/Resource"
+   }
+  },
+  "simranApidesign21DeploymentStageprod735C2FA3": {
+   "Type": "AWS::ApiGateway::Stage",
+   "Properties": {
+    "RestApiId": {
+     "Ref": "simranApidesign21D93E5C29"
+    },
+    "DeploymentId": {
+     "Ref": "simranApidesign21Deployment3B829DD68f729e5ff61ba7b79e634bc595d9cdbe"
+    },
+    "StageName": "prod",
+    "Tags": [
+     {
+      "Key": "cohort",
+      "Value": "Sirius"
+     },
+     {
+      "Key": "name",
+      "Value": "Simran_5_2"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "SimranDesign2Stack/simranApi_design_2_1/DeploymentStage.prod/Resource"
+   }
+  },
+  "simranApidesign21root884F7040": {
+   "Type": "AWS::ApiGateway::Resource",
+   "Properties": {
+    "ParentId": {
+     "Fn::GetAtt": [
+      "simranApidesign21D93E5C29",
+      "RootResourceId"
+     ]
+    },
+    "PathPart": "root",
+    "RestApiId": {
+     "Ref": "simranApidesign21D93E5C29"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "SimranDesign2Stack/simranApi_design_2_1/Default/root/Resource"
+   }
+  },
+  "simranApidesign21rootGETApiPermissionSimranDesign2StacksimranApidesign217445310CGETroot6C82549F": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "ApiLambda91D2282D",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:aws:execute-api:us-east-2:315997497220:",
+       {
+        "Ref": "simranApidesign21D93E5C29"
+       },
+       "/",
+       {
+        "Ref": "simranApidesign21DeploymentStageprod735C2FA3"
+       },
+       "/GET/root"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "SimranDesign2Stack/simranApi_design_2_1/Default/root/GET/ApiPermission.SimranDesign2StacksimranApidesign217445310C.GET..root"
+   }
+  },
+  "simranApidesign21rootGETApiPermissionTestSimranDesign2StacksimranApidesign217445310CGETrootC594792C": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "ApiLambda91D2282D",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:aws:execute-api:us-east-2:315997497220:",
+       {
+        "Ref": "simranApidesign21D93E5C29"
+       },
+       "/test-invoke-stage/GET/root"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "SimranDesign2Stack/simranApi_design_2_1/Default/root/GET/ApiPermission.Test.SimranDesign2StacksimranApidesign217445310C.GET..root"
+   }
+  },
+  "simranApidesign21rootGETCAB34F19": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "HttpMethod": "GET",
+    "ResourceId": {
+     "Ref": "simranApidesign21root884F7040"
+    },
+    "RestApiId": {
+     "Ref": "simranApidesign21D93E5C29"
+    },
+    "AuthorizationType": "NONE",
+    "Integration": {
+     "IntegrationHttpMethod": "POST",
+     "Type": "AWS_PROXY",
+     "Uri": {
+      "Fn::Join": [
+       "",
+       [
+        "arn:aws:apigateway:us-east-2:lambda:path/2015-03-31/functions/",
+        {
+         "Fn::GetAtt": [
+          "ApiLambda91D2282D",
+          "Arn"
+         ]
+        },
+        "/invocations"
+       ]
+      ]
+     }
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "SimranDesign2Stack/simranApi_design_2_1/Default/root/GET/Resource"
+   }
+  },
+  "simranApidesign21rootPOSTApiPermissionSimranDesign2StacksimranApidesign217445310CPOSTroot6405DAE2": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "ApiLambda91D2282D",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:aws:execute-api:us-east-2:315997497220:",
+       {
+        "Ref": "simranApidesign21D93E5C29"
+       },
+       "/",
+       {
+        "Ref": "simranApidesign21DeploymentStageprod735C2FA3"
+       },
+       "/POST/root"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "SimranDesign2Stack/simranApi_design_2_1/Default/root/POST/ApiPermission.SimranDesign2StacksimranApidesign217445310C.POST..root"
+   }
+  },
+  "simranApidesign21rootPOSTApiPermissionTestSimranDesign2StacksimranApidesign217445310CPOSTrootB52F69E3": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "ApiLambda91D2282D",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:aws:execute-api:us-east-2:315997497220:",
+       {
+        "Ref": "simranApidesign21D93E5C29"
+       },
+       "/test-invoke-stage/POST/root"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "SimranDesign2Stack/simranApi_design_2_1/Default/root/POST/ApiPermission.Test.SimranDesign2StacksimranApidesign217445310C.POST..root"
+   }
+  },
+  "simranApidesign21rootPOSTE5EE935E": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "HttpMethod": "POST",
+    "ResourceId": {
+     "Ref": "simranApidesign21root884F7040"
+    },
+    "RestApiId": {
+     "Ref": "simranApidesign21D93E5C29"
+    },
+    "AuthorizationType": "NONE",
+    "Integration": {
+     "IntegrationHttpMethod": "POST",
+     "Type": "AWS_PROXY",
+     "Uri": {
+      "Fn::Join": [
+       "",
+       [
+        "arn:aws:apigateway:us-east-2:lambda:path/2015-03-31/functions/",
+        {
+         "Fn::GetAtt": [
+          "ApiLambda91D2282D",
+          "Arn"
+         ]
+        },
+        "/invocations"
+       ]
+      ]
+     }
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "SimranDesign2Stack/simranApi_design_2_1/Default/root/POST/Resource"
+   }
+  },
+  "simranApidesign22AB2B4C26": {
+   "Type": "AWS::ApiGateway::RestApi",
+   "Properties": {
+    "Name": "simranApi_design_2_2",
+    "Tags": [
+     {
+      "Key": "cohort",
+      "Value": "Sirius"
+     },
+     {
+      "Key": "name",
+      "Value": "Simran_5_2"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "SimranDesign2Stack/simranApi_design_2_2/Resource"
+   }
+  },
+  "simranApidesign22Deployment19DB739F72d3a78d62d5b532858594b566471a50": {
+   "Type": "AWS::ApiGateway::Deployment",
+   "Properties": {
+    "RestApiId": {
+     "Ref": "simranApidesign22AB2B4C26"
+    },
+    "Description": "Automatically created by the RestApi construct"
+   },
+   "DependsOn": [
+    "simranApidesign22rootGETE46295CD",
+    "simranApidesign22rootPOST4422DCD9",
+    "simranApidesign22root8219FA6B"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "SimranDesign2Stack/simranApi_design_2_2/Deployment/Resource"
+   }
+  },
+  "simranApidesign22DeploymentStageprodE9BD6F66": {
+   "Type": "AWS::ApiGateway::Stage",
+   "Properties": {
+    "RestApiId": {
+     "Ref": "simranApidesign22AB2B4C26"
+    },
+    "DeploymentId": {
+     "Ref": "simranApidesign22Deployment19DB739F72d3a78d62d5b532858594b566471a50"
+    },
+    "StageName": "prod",
+    "Tags": [
+     {
+      "Key": "cohort",
+      "Value": "Sirius"
+     },
+     {
+      "Key": "name",
+      "Value": "Simran_5_2"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "SimranDesign2Stack/simranApi_design_2_2/DeploymentStage.prod/Resource"
+   }
+  },
+  "simranApidesign22root8219FA6B": {
+   "Type": "AWS::ApiGateway::Resource",
+   "Properties": {
+    "ParentId": {
+     "Fn::GetAtt": [
+      "simranApidesign22AB2B4C26",
+      "RootResourceId"
+     ]
+    },
+    "PathPart": "root",
+    "RestApiId": {
+     "Ref": "simranApidesign22AB2B4C26"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "SimranDesign2Stack/simranApi_design_2_2/Default/root/Resource"
+   }
+  },
+  "simranApidesign22rootGETApiPermissionSimranDesign2StacksimranApidesign22BE4E2BB3GETroot77FC510D": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "ApiLambda91D2282D",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:aws:execute-api:us-east-2:315997497220:",
+       {
+        "Ref": "simranApidesign22AB2B4C26"
+       },
+       "/",
+       {
+        "Ref": "simranApidesign22DeploymentStageprodE9BD6F66"
+       },
+       "/GET/root"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "SimranDesign2Stack/simranApi_design_2_2/Default/root/GET/ApiPermission.SimranDesign2StacksimranApidesign22BE4E2BB3.GET..root"
+   }
+  },
+  "simranApidesign22rootGETApiPermissionTestSimranDesign2StacksimranApidesign22BE4E2BB3GETroot481F5280": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "ApiLambda91D2282D",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:aws:execute-api:us-east-2:315997497220:",
+       {
+        "Ref": "simranApidesign22AB2B4C26"
+       },
+       "/test-invoke-stage/GET/root"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "SimranDesign2Stack/simranApi_design_2_2/Default/root/GET/ApiPermission.Test.SimranDesign2StacksimranApidesign22BE4E2BB3.GET..root"
+   }
+  },
+  "simranApidesign22rootGETE46295CD": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "HttpMethod": "GET",
+    "ResourceId": {
+     "Ref": "simranApidesign22root8219FA6B"
+    },
+    "RestApiId": {
+     "Ref": "simranApidesign22AB2B4C26"
+    },
+    "AuthorizationType": "NONE",
+    "Integration": {
+     "IntegrationHttpMethod": "POST",
+     "Type": "AWS_PROXY",
+     "Uri": {
+      "Fn::Join": [
+       "",
+       [
+        "arn:aws:apigateway:us-east-2:lambda:path/2015-03-31/functions/",
+        {
+         "Fn::GetAtt": [
+          "ApiLambda91D2282D",
+          "Arn"
+         ]
+        },
+        "/invocations"
+       ]
+      ]
+     }
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "SimranDesign2Stack/simranApi_design_2_2/Default/root/GET/Resource"
+   }
+  },
+  "simranApidesign22rootPOSTApiPermissionSimranDesign2StacksimranApidesign22BE4E2BB3POSTrootD21B6B5A": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "ApiLambda91D2282D",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:aws:execute-api:us-east-2:315997497220:",
+       {
+        "Ref": "simranApidesign22AB2B4C26"
+       },
+       "/",
+       {
+        "Ref": "simranApidesign22DeploymentStageprodE9BD6F66"
+       },
+       "/POST/root"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "SimranDesign2Stack/simranApi_design_2_2/Default/root/POST/ApiPermission.SimranDesign2StacksimranApidesign22BE4E2BB3.POST..root"
+   }
+  },
+  "simranApidesign22rootPOSTApiPermissionTestSimranDesign2StacksimranApidesign22BE4E2BB3POSTroot37C49F70": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "ApiLambda91D2282D",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:aws:execute-api:us-east-2:315997497220:",
+       {
+        "Ref": "simranApidesign22AB2B4C26"
+       },
+       "/test-invoke-stage/POST/root"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "SimranDesign2Stack/simranApi_design_2_2/Default/root/POST/ApiPermission.Test.SimranDesign2StacksimranApidesign22BE4E2BB3.POST..root"
+   }
+  },
+  "simranApidesign22rootPOST4422DCD9": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "HttpMethod": "POST",
+    "ResourceId": {
+     "Ref": "simranApidesign22root8219FA6B"
+    },
+    "RestApiId": {
+     "Ref": "simranApidesign22AB2B4C26"
+    },
+    "AuthorizationType": "NONE",
+    "Integration": {
+     "IntegrationHttpMethod": "POST",
+     "Type": "AWS_PROXY",
+     "Uri": {
+      "Fn::Join": [
+       "",
+       [
+        "arn:aws:apigateway:us-east-2:lambda:path/2015-03-31/functions/",
+        {
+         "Fn::GetAtt": [
+          "ApiLambda91D2282D",
+          "Arn"
+         ]
+        },
+        "/invocations"
+       ]
+      ]
+     }
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "SimranDesign2Stack/simranApi_design_2_2/Default/root/POST/Resource"
+   }
+  },
+  "CDKMetadata": {
+   "Type": "AWS::CDK::Metadata",
+   "Properties": {
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/02PT0/DMAzFP8vumaFMSFw3ECcQVeE+uanpQpukahxNVZXvTv4M0dP7Pcd+dh7gsYJqh1e3l92wH1UL6yejHEQsnVeFGtbGjiSev03W2o5KLskWCmJE3XYI66s3kpU16W3LNc1aORddEO5wRueIHRyTRA8nLwfiEzoS3WJQ2y6e8IVt2ZkhCJxUj0xXXGB9y/sacnycVL7rhi80jXbRZDhVNy5+qM9pBWK/9bOkvPPP3IIKvxNfbJdKhUL478uHpyBl+tTx4XnyvB0Pol7ilLk7wBNU97sfp9R+9oaVJmiK/gI6IxjyeAEAAA=="
+   },
+   "Metadata": {
+    "aws:cdk:path": "SimranDesign2Stack/CDKMetadata/Default"
+   }
+  }
+ },
+ "Outputs": {
+  "simranApidesign21EndpointA9AB717F": {
+   "Value": {
+    "Fn::Join": [
+     "",
+     [
+      "https://",
+      {
+       "Ref": "simranApidesign21D93E5C29"
+      },
+      ".execute-api.us-east-2.",
+      {
+       "Ref": "AWS::URLSuffix"
+      },
+      "/",
+      {
+       "Ref": "simranApidesign21DeploymentStageprod735C2FA3"
+      },
+      "/"
+     ]
+    ]
+   }
+  },
+  "simranApidesign22Endpoint196C0FC9": {
+   "Value": {
+    "Fn::Join": [
+     "",
+     [
+      "https://",
+      {
+       "Ref": "simranApidesign22AB2B4C26"
+      },
+      ".execute-api.us-east-2.",
+      {
+       "Ref": "AWS::URLSuffix"
+      },
+      "/",
+      {
+       "Ref": "simranApidesign22DeploymentStageprodE9BD6F66"
+      },
+      "/"
+     ]
+    ]
+   }
+  }
+ },
+ "Parameters": {
+  "BootstrapVersion": {
+   "Type": "AWS::SSM::Parameter::Value<String>",
+   "Default": "/cdk-bootstrap/hnb659fds/version",
+   "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]"
+  }
+ },
+ "Rules": {
+  "CheckBootstrapVersion": {
+   "Assertions": [
+    {
+     "Assert": {
+      "Fn::Not": [
+       {
+        "Fn::Contains": [
+         [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5"
+         ],
+         {
+          "Ref": "BootstrapVersion"
+         }
+        ]
+       }
+      ]
+     },
+     "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI."
+    }
+   ]
+  }
+ }
+}

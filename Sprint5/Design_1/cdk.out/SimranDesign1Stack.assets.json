@@ -1,0 +1,32 @@
+{
+  "version": "21.0.0",
+  "files": {
+    "5c1bb28b9c604eba4bfb54681a7009ef8c23f3d752b5377ef120b38e2dd6f83d": {
+      "source": {
+        "path": "asset.5c1bb28b9c604eba4bfb54681a7009ef8c23f3d752b5377ef120b38e2dd6f83d",
+        "packaging": "zip"
+      },
+      "destinations": {
+        "current_account-current_region": {
+          "bucketName": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}",
+          "objectKey": "5c1bb28b9c604eba4bfb54681a7009ef8c23f3d752b5377ef120b38e2dd6f83d.zip",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-file-publishing-role-${AWS::AccountId}-${AWS::Region}"
+        }
+      }
+    },
+    "7c69058bf46349b7df396d2b4eeb5e2aa631da3a6f19ddbc9504ba17dde484eb": {
+      "source": {
+        "path": "SimranDesign1Stack.template.json",
+        "packaging": "file"
+      },
+      "destinations": {
+        "current_account-current_region": {
+          "bucketName": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}",
+          "objectKey": "7c69058bf46349b7df396d2b4eeb5e2aa631da3a6f19ddbc9504ba17dde484eb.json",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-file-publishing-role-${AWS::AccountId}-${AWS::Region}"
+        }
+      }
+    }
+  },
+  "dockerImages": {}
+}
